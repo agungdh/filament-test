@@ -38,6 +38,8 @@ RUN composer install
 
 RUN php artisan storage:link
 
-EXPOSE 8000
+RUN php artisan optimize
 
-CMD ["php", "artisan", "serve"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
+
+EXPOSE 8000
