@@ -8,7 +8,7 @@ RUN dpkg -i /tmp/debsuryorg-archive-keyring.deb
 RUN sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 RUN apt-get update
 
-RUN apt-get install -y wget curl zip unzip 7zip nano net-tools supervisor \
+RUN apt-get install -y wget curl zip unzip 7zip nano net-tools supervisor nginx \
     php8.4-fpm \
     php8.4-mysql \
     php8.4-sqlite3 \
@@ -40,6 +40,6 @@ RUN php artisan storage:link
 
 RUN php artisan optimize
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
 
-EXPOSE 8000
+EXPOSE 80
