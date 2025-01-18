@@ -29,8 +29,8 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+    && chmod -R 755 storage \
+    && chmod -R 755 bootstrap/cache
 
 USER www-data
 
@@ -40,6 +40,6 @@ RUN php artisan storage:link
 
 RUN php artisan optimize
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+CMD ["sh", "docker-cmd-start.sh"]
 
 EXPOSE 80
