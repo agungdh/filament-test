@@ -61,4 +61,6 @@ RUN php artisan optimize
 
 CMD ["sh", "docker-cmd-start.sh"]
 
+USER root
+
 EXPOSE 80
