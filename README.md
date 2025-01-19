@@ -1,22 +1,16 @@
-## for first time install
-run this image and bash into it
+## How to run
 
-### run this image (you must create .env on your path first)
-```
-docker run -d \
--p 80:80 \
--v ${PWD}/.env:/var/www/html/.env:ro \
--v app_logs:/var/www/html/storage/logs \
-filament
-```
+### create .env
+### create logs dir with chmod 777
+### run docker-compose-prod.yml
 
-### run migration and seeder
+### run migration and seeder (for first time, if you already have database this step is unnecessary)
 ```
 php artisan migrate --force
 php artisan db:seed
 ```
 
-### create user
+### create user (for first time or when you just want to add user)
 ```
 php artisan make:filament-user
 ```

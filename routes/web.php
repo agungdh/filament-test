@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/throw', function () {
     throw new \Exception("tehee");
 });
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
