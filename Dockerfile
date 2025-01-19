@@ -20,7 +20,7 @@ RUN apt-get install -y sudo wget curl zip unzip 7zip nano net-tools supervisor n
     php8.4-dom \
     php8.4-redis
 
-RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh
 RUN bash nodesource_setup.sh
 RUN apt-get install -y nodejs
 RUN node -v
@@ -40,6 +40,12 @@ COPY php.ini /etc/php/8.4/fpm/php.ini
 RUN npm install
 
 RUN npm run build
+
+RUN npm cache verify
+RUN npm cache clean --force
+RUN npm cache verify
+
+RUN rm -rf node_modules
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 storage \
