@@ -1,6 +1,6 @@
 services:
   app:
-    image: filament
+    image: filament-test
     container_name: app
     restart: always
     ports:

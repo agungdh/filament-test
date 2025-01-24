@@ -18,7 +18,7 @@ services:
     restart: always
     environment:
       PMA_HOST: mariadb
-      PMA_USER: admin
+      PMA_USER: root
       PMA_PASSWORD: admin
       UPLOAD_LIMIT: 4000M
     ports:

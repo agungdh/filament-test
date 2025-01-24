@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t filament .
+docker build -t filament-test .
