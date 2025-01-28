@@ -1,18 +1,15 @@
 services:
-  app:
-    image: filament-test
+  fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: app
     restart: always
-    ports:
-      - "80:80"
     depends_on:
       - mariadb
       - redis
-    volumes:
-      - ${PWD}/.env:/var/www/html/.env:ro
-      - ${PWD}/logs:/var/www/html/storage/logs
   mariadb:
-    image: mariadb:11.4-noble
+    image: mariadb:11.4
     container_name: mariadb
     restart: always
     environment:
@@ -20,8 +17,6 @@ services:
       MARIADB_DATABASE: filament
       MARIADB_USER: admin
       MARIADB_PASSWORD: admin
-    ports:
-      - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
   phpmyadmin:
@@ -30,19 +25,17 @@ services:
     restart: always
     environment:
       PMA_HOST: mariadb
-      PMA_USER: admin
+      PMA_USER: root
       PMA_PASSWORD: admin
       UPLOAD_LIMIT: 4000M
     ports:
-      - "81:80"
+      - "82:80"
     depends_on:
       - mariadb
   redis:
     image: redis
     container_name: redis
     restart: always
-    ports:
-      - "6379:6379"
     volumes:
       - redis_data:/data
 volumes:
