@@ -15,8 +15,10 @@ RUN apk update \
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy application files
 WORKDIR $APP_DIR
+
+# Copy application files
+RUN rm -rf $APP_DIR
 COPY .. .
 
 # Set ownership and permissions
