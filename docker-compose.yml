@@ -3,11 +3,31 @@ services:
     build:
       context: .
       dockerfile: docker/fpm.Dockerfile
-    container_name: app
+    container_name: fpm
     restart: always
     depends_on:
       - mariadb
       - redis
+    volumes:
+        - app_data:/var/www/html
+  queue:
+    build:
+      context: .
+      dockerfile: docker/queue.Dockerfile
+    container_name: queue
+    restart: always
+    depends_on:
+      - fpm
+    volumes:
+        - app_data:/var/www/html
+  cron:
+    build:
+      context: .
+      dockerfile: docker/cron.Dockerfile
+    container_name: cron
+    restart: always
+    depends_on:
+      - fpm
     volumes:
         - app_data:/var/www/html
   nginx:
