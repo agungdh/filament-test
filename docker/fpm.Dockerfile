@@ -7,7 +7,7 @@ ENV APP_DIR=/var/www/html
 RUN apk update \
     && apk add --no-cache nano bash curl git unzip openssh icu-dev libzip-dev curl-dev pcre-dev $PHPIZE_DEPS \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl zip curl \
+    && docker-php-ext-install intl zip curl pdo pdo_mysql mysqli \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && apk del $PHPIZE_DEPS
