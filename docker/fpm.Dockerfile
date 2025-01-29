@@ -17,7 +17,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Copy application files
 WORKDIR $APP_DIR
-COPY . .
+COPY .. .
 
 # Set ownership and permissions
 RUN chown -R www-data:www-data $APP_DIR \

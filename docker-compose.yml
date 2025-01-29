@@ -2,12 +2,26 @@ services:
   fpm:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/fpm.Dockerfile
     container_name: app
     restart: always
     depends_on:
       - mariadb
       - redis
+    volumes:
+        - app_data:/var/www/html
+  nginx:
+    build:
+      context: docker
+      dockerfile: nginx.Dockerfile
+    container_name: nginx
+    restart: always
+    depends_on:
+      - fpm
+    ports:
+        - "80:80"
+    volumes:
+        - app_data:/var/www/html
   mariadb:
     image: mariadb:11.4
     container_name: mariadb
@@ -39,5 +53,6 @@ services:
     volumes:
       - redis_data:/data
 volumes:
+  app_data:
   mariadb_data:
   redis_data:

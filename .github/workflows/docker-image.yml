@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag filament-test:$(date +%s)
+    - name: Build the Docker image (fpm)
+      run: docker build . --file docker/fpm.Dockerfile --tag filament-test-fpm:$(date +%s)
+    - name: Build the Docker image (nginx)
+      run: docker build . --file docker/nginx.Dockerfile --tag filament-test-nginx:$(date +%s)
